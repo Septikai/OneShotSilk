@@ -61,7 +61,16 @@ namespace OneShot
             if (blades == null) return;
             foreach (var blade in blades)
             {
-                if (blade.particleField.forceField.GetInstanceID() != __instance.GetInstanceID()) continue;
+                if (blade.GetType() == typeof(DoubleParticleBlade))
+                {
+                    if (blade.particleField.forceField.GetInstanceID() != __instance.GetInstanceID() &&
+                        ((DoubleParticleBlade) blade).secondaryParticleField.forceField.GetInstanceID() !=
+                        __instance.GetInstanceID()) continue;
+                }
+                else
+                {
+                    if (blade.particleField.forceField.GetInstanceID() != __instance.GetInstanceID()) continue;
+                }
                 blade.Disintegrate();
             }
         }
@@ -80,9 +89,15 @@ namespace OneShot
             if (blades == null) return;
             foreach (var blade in blades)
             {
-                if (blade.particleField.forceField.GetInstanceID() != forceField.GetInstanceID())
+                if (blade.GetType() == typeof(DoubleParticleBlade))
                 {
-                    continue;
+                    if (blade.particleField.forceField.GetInstanceID() != forceField.GetInstanceID() &&
+                        ((DoubleParticleBlade) blade).secondaryParticleField.forceField.GetInstanceID() !=
+                        forceField.GetInstanceID()) continue;
+                }
+                else
+                {
+                    if (blade.particleField.forceField.GetInstanceID() != forceField.GetInstanceID()) continue;
                 }
                 blade.Disintegrate();
             }
