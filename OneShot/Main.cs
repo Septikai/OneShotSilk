@@ -1,19 +1,19 @@
 ﻿using BepInEx;
 using HarmonyLib;
-using HarmonyLib.Tools;
 using Interfaces;
 using UnityEngine;
 
 namespace OneShot
 {
-    [BepInPlugin(ModName, ModGUID, ModVersion)]
+    [BepInPlugin(ModGUID, ModName, ModVersion)]
     public class Main : BaseUnityPlugin
     {
         public const string ModName = "OneShot";
-        public const string ModAuthor  = "Septikai";
-        public const string ModGUID = "me.septikai.OneShot";
-        public const string ModVersion = "1.0.0";
+        public const string ModAuthor = "Septikai";
+        public const string ModVersion = "1.1.0";
+        private const string ModGUID = "me.septikai.OneShot";
         internal Harmony Harmony;
+        
         internal void Awake()
         {
             // Creating new harmony instance
@@ -40,8 +40,6 @@ namespace OneShot
         [HarmonyPostfix]
         public static void OneAmmo(Weapon __instance, float value)
         {
-            var playerCount = LobbyController.instance.GetPlayerCount();
-            if (playerCount != 1) return;
             if (__instance.type.Contains(Weapon.WeaponType.Particle)) return;
             if (value != __instance.maxAmmo) __instance.networkAmmo.Value = 0;
         }
@@ -53,8 +51,6 @@ namespace OneShot
         [HarmonyPostfix]
         public static void OneUseBlades(ForceField __instance, Collision2D other)
         {
-            var playerCount = LobbyController.instance.GetPlayerCount();
-            if (playerCount != 1) return;
             var component = other.gameObject.GetComponent<IDamageable>();
             if (component.GetType().IsSubclassOf(typeof(Weapon))) return;
             var blades = UnityEngine.Object.FindObjectsOfType<ParticleBlade>();
@@ -82,8 +78,6 @@ namespace OneShot
         [HarmonyPostfix]
         public static void OneReflect(RaycastHit2D hit)
         {
-            var playerCount = LobbyController.instance.GetPlayerCount();
-            if (playerCount != 1) return;
             var forceField = hit.collider.gameObject.GetComponent<ForceField>();
             var blades = UnityEngine.Object.FindObjectsOfType<ParticleBlade>();
             if (blades == null) return;
@@ -103,5 +97,4 @@ namespace OneShot
             }
         }
     }
-    
 }
