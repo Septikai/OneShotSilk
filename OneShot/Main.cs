@@ -10,27 +10,16 @@ namespace OneShot
     {
         public const string ModName = "OneShot";
         public const string ModAuthor = "Septikai";
-        public const string ModVersion = "1.1.0";
+        public const string ModVersion = "1.1.1";
         private const string ModGUID = "me.septikai.OneShot";
         internal Harmony Harmony;
         
         internal void Awake()
         {
-            // Creating new harmony instance
             Harmony = new Harmony(ModGUID);
 
-            // Applying patches
             Harmony.PatchAll();
             Logger.LogInfo($"{ModName} successfully loaded! Made by {ModAuthor}");
-        }
-    }
-    
-    [HarmonyPatch(typeof(VersionNumberTextMesh), nameof(VersionNumberTextMesh.Start))]
-    public class VersionNumberTextMeshPatch
-    {
-        public static void Postfix(VersionNumberTextMesh __instance)
-        {
-            __instance.textMesh.text += $"\n<color=red>{Main.ModName} v{Main.ModVersion} by {Main.ModAuthor}</color>";
         }
     }
 
