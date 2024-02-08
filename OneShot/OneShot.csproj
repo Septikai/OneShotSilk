@@ -1,31 +1,184 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props"
+            Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')"/>
     <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
-        <LangVersion>latest</LangVersion>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-        <DebugType>embedded</DebugType>
-        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-
-        <Description>A SpiderHeck mod where enemies only take one hit to kill but every weapon can only be used once</Description>
-        <Version>1.0.0</Version>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+        <ProjectGuid>{92CBA23E-4FE7-4282-9FFD-5CABA00CD0AF}</ProjectGuid>
+        <OutputType>Library</OutputType>
+        <AppDesignerFolder>Properties</AppDesignerFolder>
         <RootNamespace>OneShot</RootNamespace>
+        <AssemblyName>OneShot</AssemblyName>
+        <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+        <FileAlignment>512</FileAlignment>
     </PropertyGroup>
-
-    <PropertyGroup>
-        <GameVersion>0.86.2-r.0</GameVersion>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
+        <Optimize>false</Optimize>
+        <OutputPath>bin\Debug\</OutputPath>
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
     </PropertyGroup>
-
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugType>pdbonly</DebugType>
+        <Optimize>true</Optimize>
+        <OutputPath>bin\Release\</OutputPath>
+        <DefineConstants>TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="BepInEx.Unity" Version="6.0.0-be.556" PrivateAssets="all" />
-        <PackageReference Include="SpiderHeck.GameLibs" Version="$(GameVersion)" PrivateAssets="all" />
-
-        <PackageReference Include="UnityEngine.Modules" Version="2020.3.13" PrivateAssets="all" />
+        <Reference Include="0Harmony, Version=2.10.2.0, Culture=neutral, processorArchitecture=MSIL">
+          <HintPath>..\packages\HarmonyX.2.10.2\lib\net45\0Harmony.dll</HintPath>
+        </Reference>
+        <Reference Include="Accessibility, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+            <HintPath>..\packages\SpiderHeck.GameLibs.99.1.5\lib\Accessibility.dll</HintPath>
+        </Reference>
+        <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+            <HintPath>..\packages\SpiderHeck.GameLibs.99.1.5\lib\Assembly-CSharp.dll</HintPath>
+        </Reference>
+        <Reference Include="Assembly-CSharp-firstpass, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+            <HintPath>..\packages\SpiderHeck.GameLibs.99.1.5\lib\Assembly-CSharp-firstpass.dll</HintPath>
+        </Reference>
+        <Reference Include="Cinemachine, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+            <HintPath>..\packages\SpiderHeck.GameLibs.99.1.5\lib\Cinemachine.dll</HintPath>
+        </Reference>
+        <Reference Include="DDebug, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+            <HintPath>..\packages\SpiderHeck.GameLibs.99.1.5\lib\DDebug.dll</HintPath>
+        </Reference>
+        <Reference Include="DoozyEngine, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+            <HintPath>..\packages\SpiderHeck.GameLibs.99.1.5\lib\DoozyEngine.dll</HintPath>
+        </Reference>
+        <Reference Include="DOTween, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+            <HintPath>..\packages\SpiderHeck.GameLibs.99.1.5\lib\DOTween.dll</HintPath>
+        </Reference>
+        <Reference Include="DOTween.Modules, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+            <HintPath>..\packages\SpiderHeck.GameLibs.99.1.5\lib\DOTween.Modules.dll</HintPath>
+        </Reference>
+        <Reference Include="EasySave3, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+            <HintPath>..\packages\SpiderHeck.GameLibs.99.1.5\lib\EasySave3.dll</HintPath>
+        </Reference>
+        <Reference Include="GdkUtilities, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+            <HintPath>..\packages\SpiderHeck.GameLibs.99.1.5\lib\GdkUtilities.dll</HintPath>
+        </Reference>
+        <Reference Include="I2, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+            <HintPath>..\packages\SpiderHeck.GameLibs.99.1.5\lib\I2.dll</HintPath>
+        </Reference>
+        <Reference Include="JunTween, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+            <HintPath>..\packages\SpiderHeck.GameLibs.99.1.5\lib\JunTween.dll</HintPath>
+        </Reference>
+        <Reference Include="modweaver.core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+          <HintPath>..\packages\modweaver.core.1.1.0\lib\net472\modweaver.core.dll</HintPath>
+        </Reference>
+        <!--<Reference Include="modweaver.core">
+          <HintPath>..\ref\modweaver.core.dll</HintPath>
+        </Reference>-->
+        <Reference Include="Mono.Cecil, Version=0.11.4.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
+            <HintPath>..\packages\Mono.Cecil.0.11.4\lib\net40\Mono.Cecil.dll</HintPath>
+        </Reference>
+        <Reference Include="Mono.Cecil.Mdb, Version=0.11.4.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
+          <HintPath>..\packages\Mono.Cecil.0.11.4\lib\net40\Mono.Cecil.Mdb.dll</HintPath>
+        </Reference>
+        <Reference Include="Mono.Cecil.Pdb, Version=0.11.4.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
+          <HintPath>..\packages\Mono.Cecil.0.11.4\lib\net40\Mono.Cecil.Pdb.dll</HintPath>
+        </Reference>
+        <Reference Include="Mono.Cecil.Rocks, Version=0.11.4.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
+          <HintPath>..\packages\Mono.Cecil.0.11.4\lib\net40\Mono.Cecil.Rocks.dll</HintPath>
+        </Reference>
+        <Reference Include="MonoMod.RuntimeDetour, Version=22.3.23.4, Culture=neutral, processorArchitecture=MSIL">
+          <HintPath>..\packages\MonoMod.RuntimeDetour.22.3.23.4\lib\net452\MonoMod.RuntimeDetour.dll</HintPath>
+        </Reference>
+        <Reference Include="MonoMod.Utils, Version=22.3.23.4, Culture=neutral, processorArchitecture=MSIL">
+          <HintPath>..\packages\MonoMod.Utils.22.3.23.4\lib\net452\MonoMod.Utils.dll</HintPath>
+        </Reference>
+        <Reference Include="MyScriptAssembly, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+            <HintPath>..\packages\SpiderHeck.GameLibs.99.1.5\lib\MyScriptAssembly.dll</HintPath>
+        </Reference>
+        <Reference Include="NewAssembly, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+            <HintPath>..\packages\SpiderHeck.GameLibs.99.1.5\lib\NewAssembly.dll</HintPath>
+        </Reference>
+        <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+          <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+        </Reference>
+        <Reference Include="NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+          <HintPath>..\packages\NLog.5.2.6\lib\net46\NLog.dll</HintPath>
+        </Reference>
+        <Reference Include="Pathfinding.Ionic.Zip.Reduced, Version=1.9.1.9000, Culture=neutral, processorArchitecture=MSIL">
+            <HintPath>..\packages\SpiderHeck.GameLibs.99.1.5\lib\Pathfinding.Ionic.Zip.Reduced.dll</HintPath>
+        </Reference>
+        <Reference Include="SteamP2P Transport for Netcode for GameObjects, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+            <HintPath>..\packages\SpiderHeck.GameLibs.99.1.5\lib\SteamP2P Transport for Netcode for GameObjects.dll</HintPath>
+        </Reference>
+        <Reference Include="Steamworks.NET, Version=15.0.1.0, Culture=neutral, processorArchitecture=Amd64">
+            <HintPath>..\packages\SpiderHeck.GameLibs.99.1.5\lib\Steamworks.NET.dll</HintPath>
+        </Reference>
+        <Reference Include="System"/>
+        <Reference Include="System.Configuration" />
+        <Reference Include="System.Core"/>
+        <Reference Include="System.Data"/>
+        <Reference Include="System.IO.Compression" />
+        <Reference Include="System.Xml"/>
+        <Reference Include="Tomlyn, Version=0.16.0.0, Culture=neutral, processorArchitecture=MSIL">
+          <HintPath>..\packages\Tomlyn.0.16.2\lib\netstandard2.0\Tomlyn.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.2D.Animation.Runtime, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+            <HintPath>..\packages\SpiderHeck.GameLibs.99.1.5\lib\Unity.2D.Animation.Runtime.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.2D.Common.Runtime, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+            <HintPath>..\packages\SpiderHeck.GameLibs.99.1.5\lib\Unity.2D.Common.Runtime.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.Collections, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+            <HintPath>..\packages\SpiderHeck.GameLibs.99.1.5\lib\Unity.Collections.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.InputSystem, Version=1.5.1.0, Culture=neutral, processorArchitecture=MSIL">
+            <HintPath>..\packages\SpiderHeck.GameLibs.99.1.5\lib\Unity.InputSystem.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.Mathematics, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+            <HintPath>..\packages\SpiderHeck.GameLibs.99.1.5\lib\Unity.Mathematics.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.Netcode.Components, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+            <HintPath>..\packages\SpiderHeck.GameLibs.99.1.5\lib\Unity.Netcode.Components.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.Netcode.Runtime, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+            <HintPath>..\packages\SpiderHeck.GameLibs.99.1.5\lib\Unity.Netcode.Runtime.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.TextMeshPro, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+            <HintPath>..\packages\SpiderHeck.GameLibs.99.1.5\lib\Unity.TextMeshPro.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.Timeline, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+            <HintPath>..\packages\SpiderHeck.GameLibs.99.1.5\lib\Unity.Timeline.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+            <HintPath>..\packages\SpiderHeck.GameLibs.99.1.5\lib\UnityEngine.CoreModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.UI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+            <HintPath>..\packages\SpiderHeck.GameLibs.99.1.5\lib\UnityEngine.UI.dll</HintPath>
+        </Reference>
     </ItemGroup>
-
-    <Target Name="Copy" AfterTargets="Build" Condition="'$(SpiderHeck)' != ''">
-        <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(SpiderHeck)\BepInEx\plugins\" UseSymboliclinksIfPossible="true" />
+    <ItemGroup>
+        <Compile Include="Main.cs" />
+        <Compile Include="Properties\AssemblyInfo.cs"/>
+    </ItemGroup>
+    <ItemGroup>
+      <None Include="packages.config" />
+    </ItemGroup>
+    <ItemGroup>
+        <EmbeddedResource Include="mw.mod.toml">
+            <LogicalName>mw.mod.toml</LogicalName>
+        </EmbeddedResource>
+    </ItemGroup>
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
+    <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+         Other similar extension points exist, see Microsoft.Common.targets.
+    <Target Name="BeforeBuild">
     </Target>
+    <Target Name="AfterBuild">
+    </Target>
+    -->
 
 </Project>
