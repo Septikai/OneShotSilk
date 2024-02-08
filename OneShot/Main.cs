@@ -1,6 +1,5 @@
 ﻿using HarmonyLib;
 using modweaver.core;
-using NLog;
 
 namespace OneShot
 {
