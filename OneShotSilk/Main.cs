@@ -27,12 +27,12 @@ namespace OneShot
 
         public void Awake()
         {
-            Logger.LogInfo("Loaded InfiniteAmmo!");
+            Logger.LogInfo("Loaded OneShot!");
         }
 
         public override void Unload()
         {
-            Logger.LogInfo("Unloaded InfiniteAmmo!");
+            Logger.LogInfo("Unloaded OneShot!");
         }
     }
     

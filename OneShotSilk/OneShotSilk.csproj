@@ -25,7 +25,7 @@
 
         <!-- Target Framework -->
         <TargetFramework>net472</TargetFramework>
-        <RootNamespace>InfiniteAmmo</RootNamespace>
+        <RootNamespace>OneShot</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
