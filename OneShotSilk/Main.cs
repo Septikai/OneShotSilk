@@ -1,56 +1,55 @@
-﻿using HarmonyLib;
-using modweaver.core;
+﻿using Silk;
+using Logger = Silk.Logger; // Alias for Silk.Logger to Logger
+using HarmonyLib;
+using Interfaces;
+using Unity.Netcode; // Library for runtime method patching
+using UnityEngine; // Unity's core namespace
 
 namespace OneShot
 {
-    [ModMainClass]
-    public class Main : Mod
+    [SilkMod("Oneshot", new[] { "Septikai" }, "1.3.0", "0.4.0", "one-shot-silk")]
+    public class Main : SilkMod
     {
-        public override void Init()
+        public override void Initialize()
         {
             // your manifest is the mw.mod.toml file
             // use Metadata to access the values you provided in the manifest. Manifest is also available, and provides the other data such as your dependencies and incompats
-            Logger.Info("Loading {0} v{1} by {2}!", Metadata.title, Metadata.version,
-                string.Join(", ", Metadata.authors));
+            Logger.LogInfo("Loading OneShot 1.3.0 by Septikai!");
             
             // this section currently patches any [HarmonyPatch]s you use, like the one named NoMoreLaserCubes below. if you don't patch anything, you can remove these
             // you should keep the logging messages as they help users and developers with debugging
-            Logger.Debug("Setting up patcher...");
-            Harmony harmony = new Harmony(Metadata.id); 
-            Logger.Debug("Patching...");
+            Logger.LogInfo("Setting up patcher...");
+            Harmony harmony = new Harmony("me.septikai.oneshot"); 
+            Logger.LogInfo("Patching...");
             harmony.PatchAll();
+            Logger.LogInfo("Patches applied!");
         }
 
-        public override void Ready()
+        public void Awake()
         {
-            Logger.Info("Loaded {0}!", Metadata.title);
+            Logger.LogInfo("Loaded InfiniteAmmo!");
         }
 
-        public override void OnGUI(ModsMenuPopup ui)
+        public override void Unload()
         {
-            // you can add data to your mods page here
-            // we recommend if you are going to add ui here, put
-            // ui.CreateDivider() first
-            // you'll see why :3
+            Logger.LogInfo("Unloaded InfiniteAmmo!");
         }
     }
     
     [HarmonyPatch(typeof(Weapon), nameof(Weapon.ammo), MethodType.Setter)]
     public class AmmoPatchSetter
     {
-        [HarmonyPostfix]
-        public static void OneAmmo(Weapon __instance, float value)
+        public static void Postfix(Weapon __instance, float value, ref NetworkVariable<float> ___networkAmmo)
         {
             if (__instance.type.Contains(Weapon.WeaponType.Particle)) return;
-            if (value != __instance.maxAmmo) __instance.networkAmmo.Value = 0;
+            if (value != __instance.maxAmmo) ___networkAmmo.Value = 0;
         }
     }
     
-    [HarmonyPatch(typeof(ForceField), nameof(ForceField.Damage))]
+    [HarmonyPatch(typeof(ForceField), "Damage")]
     public class ForceFieldDamagePatch
     {
-        [HarmonyPostfix]
-        public static void OneUseBlades(ForceField __instance, Collision2D other)
+        public static void Postfix(ForceField __instance, Collision2D other)
         {
             var component = other.gameObject.GetComponent<IDamageable>();
             if (component.GetType().IsSubclassOf(typeof(Weapon))) return;
@@ -73,11 +72,10 @@ namespace OneShot
         }
     }
     
-    [HarmonyPatch(typeof(RailShot), nameof(RailShot.ReflectShot))]
+    [HarmonyPatch(typeof(RailShot), "ReflectShot")]
     public class ShotReflectionPatch
     {
-        [HarmonyPostfix]
-        public static void OneReflect(RaycastHit2D hit)
+        public static void Postfix(RaycastHit2D hit)
         {
             var forceField = hit.collider.gameObject.GetComponent<ForceField>();
             var blades = UnityEngine.Object.FindObjectsOfType<ParticleBlade>();
